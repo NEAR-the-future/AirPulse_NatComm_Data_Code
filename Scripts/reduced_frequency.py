@@ -21,17 +21,17 @@ mpl.rcParams.update({
 
 # Create a dictionary with the data from the table
 data = {
-    'Robot': ['USTButterfly-II', 'Zhang et al.', 'USTButterfly', 'AirPulse'],
-    'Year': [2022, 2023, 2024, 2025],
-    'Weight_g': [54, 39.6, 107.1, 26],
-    'Wingspan_cm': [50, 62, 90, 62],
-    'Flapping_Frequency_Hz': [4.4, 2.25, 3.25, 3.25],  
-    'Flapping_Amplitude_deg': [80, 105, 50, 90],  
-    'Wing_Surface_mm2': [71052.6, 113380, 123184.3, 54916.83],  
-    'Flight_Speed_ms': [2.35, 1.5, 0.53, 0.8],
-    'Color': ['#CCB974', '#55A868', '#C44E52', '#8172B2'],
-    'Marker': ['s', 'o', 'D', '*'],
-    'MarkerSize': [9.5, 10.5, 9.12, 13]  
+    'Robot': ['USTButterfly-II', 'USTButterfly', 'AirPulse', 'eMotionButterfly'],
+    'Year': [2022, 2024, 2025, 2015],
+    'Weight_g': [54, 107.1, 26, 32],
+    'Wingspan_cm': [50, 90, 60, 50],
+    'Flapping_Frequency_Hz': [4.4, 3.25, 3.25, 2],  
+    'Flapping_Amplitude_deg': [80, 50, 90, 0],  
+    'Wing_Surface_mm2': [71052.6, 123184.3, 54916.83, 45861.9],  
+    'Flight_Speed_ms': [2.35, 0.53, 1.0, 2.5],
+    'Color': ['#CCB974', '#C44E52', '#8172B2', '#4C72B0'],
+    'Marker': ['s', 'D', '*', 'X'],
+    'MarkerSize': [9.5, 9.12, 13, 10.5]  
 }
 # Convert to DataFrame
 df = pd.DataFrame(data)
@@ -51,7 +51,8 @@ def calculate_velocity_ranges(df):
         current_speed = row['Flight_Speed_ms']  # m/s
         
         # Calculate mean chord length
-        chord_length = wing_surface / wingspan  # m
+        chord_length = 2 * wing_surface / wingspan  # m
+        # print(f"Chord length for {row['Robot']}: {chord_length:.4f} m")
         
         # Current reduced frequency
         current_reduced_freq = (np.pi * frequency * chord_length) / current_speed if current_speed > 0 else np.inf
@@ -73,7 +74,7 @@ def calculate_velocity_ranges(df):
 velocity_df = calculate_velocity_ranges(df)
 
 # Reorder the dataframe according to specified order
-robot_order = ["AirPulse", "Zhang et al.", "USTButterfly", "USTButterfly-II"]
+robot_order = ["AirPulse", "USTButterfly", "USTButterfly-II", "eMotionButterfly"]
 velocity_df = velocity_df.set_index('Robot').loc[robot_order].reset_index()
 
 fig, ax = plt.subplots(1, 1, figsize=(6, 4))
@@ -85,7 +86,7 @@ reduced_freq = np.logspace(-2, 2, 300)  # Reduced frequency range
 V, K = np.meshgrid(velocities, reduced_freq)
 
 # Create custom colormap for regimes
-colors = ['#2E8B57', '#FFD700', '#DC1433']  # Green, Yellow, Red
+colors = ['#497C5F', '#F2CB61', "#2B5B84"]  # Green, Yellow, Red
 cmap = LinearSegmentedColormap.from_list('regime_cmap', colors, N=256)
 
 # Create regime indicator (log scale for smooth transition)
