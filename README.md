@@ -1,6 +1,6 @@
 # README
 
-This directory contains data and scripts to reproduce figures presented in the paper: "A 26-Gram Butterfly-Inspired Robot Achieving Autonomous Tailless Flight" (Weibin Gu *et al.*), under review. Detailed information is given as follows.
+This directory contains data and scripts to reproduce figures presented in the paper: "A 26-Gram Tailless Butterfly-Inspired Flapping-Wing Robot with Onboard Attitude Control" (Weibin Gu *et al.*), under review. Detailed information is given as follows.
 
 
 
