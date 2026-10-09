@@ -1,7 +1,7 @@
 # README
+[![DOI](https://zenodo.org/badge/1083222122.svg)](https://doi.org/10.5281/zenodo.23256561)
 
 This directory contains data and scripts to reproduce figures presented in the paper: "A 26-Gram Tailless Butterfly-Inspired Flapping-Wing Robot with Onboard Attitude Control" (Weibin Gu *et al.*), under review. 
-[![DOI](https://zenodo.org/badge/1083222122.svg)](https://doi.org/10.5281/zenodo.23256561)
 
 Detailed information is given as follows.
 
